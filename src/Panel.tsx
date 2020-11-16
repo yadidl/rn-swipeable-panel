@@ -30,6 +30,7 @@ type SwipeablePanelProps = {
   fullWidth?: boolean;
   noBackgroundOpacity?: boolean;
   style?: object;
+  smallHeight:number;
   closeRootStyle?: object;
   closeIconStyle?: object;
   closeOnTouchOutside?: boolean;
@@ -170,7 +171,7 @@ class SwipeablePanel extends Component<SwipeablePanelProps, SwipeablePanelState>
 
     if (newStatus === STATUS.CLOSED) newY = PANEL_HEIGHT;
     else if (newStatus === STATUS.SMALL)
-      newY = this.state.orientation === 'portrait' ? FULL_HEIGHT - 400 : FULL_HEIGHT / 3;
+      newY = PANEL_HEIGHT-this.props.smallHeight;
     else if (newStatus === STATUS.LARGE) newY = 0;
 
     this.setState({

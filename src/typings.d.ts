@@ -10,7 +10,7 @@ declare interface SwipeablePanelProps extends React.Props<SwipeablePanel> {
    * Required prop for panels actual state. Set true if you want to open panel
    */
   isActive: boolean;
-
+  smallHeight:number;
   /**
    * Set true if you want to show close button
    */
