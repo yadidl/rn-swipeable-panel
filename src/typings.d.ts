@@ -76,6 +76,11 @@ declare interface SwipeablePanelProps extends React.Props<SwipeablePanel> {
    */
   allowTouchOutside?: boolean;
 
+  /**
+   * Set true if you want to close panel by swip down on small mode
+   */
+  swipToClose?: boolean;
+
   // Event Handlers
 
   /**

@@ -40,6 +40,7 @@ type SwipeablePanelProps = {
   noBar?: boolean;
   barStyle?: object;
   allowTouchOutside?: boolean;
+  swipToClose?: boolean;
 };
 
 type MaybeAnimated<T> = T | Animated.Value;
@@ -101,7 +102,7 @@ class SwipeablePanel extends Component<SwipeablePanelProps, SwipeablePanelState>
           });
       },
       onPanResponderRelease: (evt, gestureState) => {
-        const { onlyLarge, onlySmall } = this.props;
+        const { onlyLarge, onlySmall,swipToClose } = this.props;
         this.state.pan.flattenOffset();
 
         if (gestureState.dy === 0) this._animateTo(this.state.status);
@@ -110,7 +111,7 @@ class SwipeablePanel extends Component<SwipeablePanelProps, SwipeablePanelState>
           else this._animateTo(STATUS.LARGE);
         } else if (gestureState.dy > 100 || gestureState.vy > 0.5) {
           if (this.state.status === STATUS.LARGE) this._animateTo(onlyLarge ? STATUS.CLOSED : STATUS.SMALL);
-          else this._animateTo(0);
+          else if(swipToClose) this._animateTo(0);
         } else this._animateTo(this.state.status);
       },
     });
