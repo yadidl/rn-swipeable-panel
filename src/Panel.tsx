@@ -112,6 +112,7 @@ class SwipeablePanel extends Component<SwipeablePanelProps, SwipeablePanelState>
         } else if (gestureState.dy > 100 || gestureState.vy > 0.5) {
           if (this.state.status === STATUS.LARGE) this._animateTo(onlyLarge ? STATUS.CLOSED : STATUS.SMALL);
           else if(swipToClose) this._animateTo(0);
+          else this._animateTo(this.state.status);
         } else this._animateTo(this.state.status);
       },
     });
