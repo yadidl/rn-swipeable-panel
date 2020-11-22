@@ -41,6 +41,7 @@ type SwipeablePanelProps = {
   barStyle?: object;
   allowTouchOutside?: boolean;
   swipToClose?: boolean;
+  status: number;
 };
 
 type MaybeAnimated<T> = T | Animated.Value;
@@ -149,7 +150,7 @@ class SwipeablePanel extends Component<SwipeablePanelProps, SwipeablePanelState>
   };
 
   componentDidUpdate(prevProps: SwipeablePanelProps, prevState: SwipeablePanelState) {
-    const { isActive, openLarge, onlyLarge, onlySmall } = this.props;
+    const { status,isActive, openLarge, onlyLarge, onlySmall } = this.props;
     if (onlyLarge && onlySmall)
       console.warn(
         'Ops. You are using both onlyLarge and onlySmall options. onlySmall will override the onlyLarge in this situation. Please select one of them or none.',
@@ -166,6 +167,10 @@ class SwipeablePanel extends Component<SwipeablePanelProps, SwipeablePanelState>
     }
 
     if (prevState.orientation !== this.state.orientation) this._animateTo(this.state.status);
+    if (prevState.status !== status) {
+      this.setState({ status });
+      this._animateTo(this.state.status);
+    }
   }
 
   _animateTo = (newStatus = 0) => {
